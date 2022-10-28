@@ -1,0 +1,46 @@
+{% extends "login/layout.html" %}
+
+{% block body %}
+
+    <h2 style="text-align: center;">Register</h2>
+
+    {% if message %}
+        <div style="text-align: center;">{{ message }}</div>
+    {% endif %}
+
+    <form action="" method="post" enctype="multipart/form-data" style="text-align: center;">
+        {% csrf_token %}
+        <div class="form-group">
+            <input  autofocus type="text" name="firstname" placeholder="First Name">
+        </div>
+        <div class="form-group">
+            <input  autofocus type="text" name="lastname" placeholder="Last Name">
+        </div>
+        <div class="form-group">
+            <input  autofocus type="text" name="username" placeholder="Username">
+        </div>
+        
+        <div class="form-group">
+            <input  type="email" name="email" placeholder="Email Address">
+        </div>
+        <div class="form-group">
+            <input  type="password" name="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <input  type="password" name="confirmation" placeholder="Confirm Password">
+        </div>
+        <div class="form-group">
+            <input  autofocus type="text" name="address" placeholder="city, state, pincode">
+        </div>
+        <div class="form-group">
+            <h6>Profile Picture<br><h6>
+            <input type="file" name="img" id="img"><br>
+        </div>
+        <input class="btn btn-primary" type="submit" value="Register">
+    </form>
+    <div style="text-align: center;">
+        Already have an account? <a href="{% url 'L:login' %}">Log In here.</a>
+    </div>
+
+    
+{% endblock %}

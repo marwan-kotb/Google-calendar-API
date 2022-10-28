@@ -1,0 +1,41 @@
+{% extends "login/layout.html" %}
+
+{% block body %}
+
+    {% if message %}
+        <div style="text-align: center;">{{ message }}</div>
+    {% endif %}
+    
+    <form action="{% url 'L:blogs' %}" method="post" enctype="multipart/form-data" style="text-align: center;">
+        {% csrf_token %}
+        <div>
+            <input disabled  value="{{ user.username }}"><br>
+        </div>
+        <div >
+            <input  autofocus type="text" name="title" placeholder="Title"><br>
+        </div>
+        <div>
+            <label for="categ">Categories:</label>
+            <select id="categ", name="categ">
+              {% for item in categories %}
+                <option value={{item.id}}>{{item.categryName}}</option>
+              {% endfor %}
+            </select> 
+        </div>
+        
+        <div>
+            <textarea id="summary" name="summary" placeholder="Summary"></textarea><br>
+        </div>
+        <div>
+            <textarea id="content" name="content" placeholder="Content"></textarea><br>
+        </div>
+        <div class="form-group">
+            <h6>ImageBlog: <h6>
+            <input type="file" name="imgBlog" id="imgBlog"><br>
+        </div>
+        <input type="checkbox" id="drafted" name="drafted" value="True">
+        <label for="drafted">Draft</label><br>
+        <input class="btn btn-primary" type="submit" value="Create">
+    </form>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Patient & Doctor{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{% static 'login/style.css' %}" rel="stylesheet">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- <link rel="stylesheet" type="text/css" href="jquery.datetimepicker.css'"/ > -->
+        <!-- <script src="/build/jquery.datetimepicker.full.min.js"></script> -->
+        <!-- <script src="{% static 'login/jquery.js' %}"></script> -->
+        
+        {% block script %}    
+        {% endblock %}
+        
+        
+        <!-- <script src="{% static 'login/jquery.min.js' %}"></script>
+        <script src="{% static 'login/main.js' %}"></script>
+        <script src="{% static 'login/popper.js' %}"></script>
+        <script src="{% static 'login/bootstrap.min.js' %}"></script> -->
+        
+        
+        
+    </head>
+    
+    <body>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Patient & Doctor</a>
+            {% if user.is_authenticated %}
+                {% if user.is_patient %}
+                    
+                {% else %}
+                <a class="navbar-brand" href="{% url 'L:blogs' %}">Create New Blog</a>
+                {% endif %}
+            {% endif %}
+        </nav>
+        <div class="body">
+            {% block body %}
+            {% endblock %}
+        </div>
+    </body>
+</html>

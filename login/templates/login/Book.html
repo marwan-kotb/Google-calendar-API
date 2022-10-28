@@ -1,0 +1,24 @@
+
+{% extends "login/layout.html" %}
+{% block body %}
+<br><br>
+
+{% if message %}
+        <div style="text-align: center;">{{ message }}</div>
+    {% endif %}
+<form action="{% url 'L:Book' doc pat %}" method="post" style="text-align: center;">
+    {% csrf_token %}
+    <h3>Doctor&User</h3>
+    <div>
+        <input disabled name="doc" value="{{ doc }}">
+        <input disabled name="pat" value="{{ pat }}">
+    </div><br>
+    
+    <div class="form-group">
+        <input type="text" name="speciality" placeholder="Required speciality">
+    </div><br>
+    <label for="appointment">Appointment</label><br>
+    <input type="datetime-local" id="appointment" name="appointment"><br>
+    <input type="submit" value="Confirm" class="btn btn-primary">
+  </form>
+  {% endblock %}

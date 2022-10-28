@@ -1,0 +1,117 @@
+{% extends "login/layout.html" %}
+
+{% block body %}
+
+{% if user.is_authenticated %}
+
+<div style="text-align: center;;">
+    
+    <h3>First Name: {{user.first_name}}<br><h3>
+    <h3>Last Name: {{user.last_name}}<br><h3>
+    <h3>Profile Picture: <img src="media/{{STATIC_URL}}/{{user.img}}" width="200" height="200"/><br><h3>
+        <h3>Username: {{user.username}}<br><h3>
+            <h3>Email Id: {{user.email}}<br><h3>
+                <h3>Address: {{user.address}}<br><h3>
+    {%if user.is_patient%}
+    <h3>Type: Patient<br><h3>
+    {%else%}
+    <h3>Type: Doctor<br><h3>
+    {%endif%}
+
+</div>
+
+{% if user.is_patient %}
+    {% if doctors %}
+    <div id="doctors" style="text-align: left;">
+        <table class="table">
+            <thead class="thead-primary">
+              <tr>
+                <th>#</th>
+                <th>Doctor Name</th>
+                <th>Image</th>
+                <th>Book</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for doc in doctors %}
+                    <tr>
+                        <th>#</th>
+                        <th>{{doc.username}}</th>
+                        <th><img src="media/{{STATIC_URL}}/{{doc.img}}" width="200" height="200"/></th>
+                        <th> <a href="{% url 'L:Book' doc user %}">Book Appointment</a></th>
+                    </tr>
+                     
+                {% endfor %}
+            </tbody>
+        </table>
+        
+    </div>
+    {% endif %}
+{% endif %}
+
+{% if data %}
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center mb-5">
+                <h1 class="heading-section">BLOGS</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-wrap">
+                    <table class="table">
+                      <thead class="thead-primary">
+                        <tr>
+                          <th>#</th>
+                          <th>Title</th>
+                          <th>Image</th>
+                          <th>Summary</th>
+                          <th>Drafted</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                   
+                        {% for item in data %}
+                        <tr>
+                            <th>#</th>
+                            <th>{{item.title}}</th>
+                            <th><img src="media/{{STATIC_URL}}/{{item.imgBlog}}" width="200" height="200"/></th>
+                            <th>{{item.summary}}</th>
+                            <th>{{item.drafted}}</th>
+                        </tr>
+                        {% endfor %}
+                    
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{%endif%}
+
+
+
+
+<div>
+    <ul class="navbar-nav mr-auto">
+      
+          <li class="nav-item">
+            <h2><a class="nav-link" href="{% url 'L:logout' %}">Log Out</a><h2>
+          </li>
+    </ul>
+</div>
+
+{%else%}
+<div style="text-align: center;">
+<h1><a href= {% url 'L:register' 'Patient' %}>Patient</a><h1>
+<h1><a href={% url 'L:register' 'Doctor' %}>Doctor</a><h1>  
+</div>
+{%endif%}
+
+{% endblock %}
+
+{% block script %}
+   
+    {% endblock %}

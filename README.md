@@ -17,7 +17,7 @@
 
 ## Demo
 
-[Host link](https://google-api-calendar.herokuapp.com/)
+[Host link](https://calendar-api-google.herokuapp.com/)
 
 
 ## Description
